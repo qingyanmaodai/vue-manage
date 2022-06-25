@@ -1,6 +1,6 @@
 <template>
-  <el-menu default-active="1-4-1" class="el-menu-vertical-demo" background-color="#545c64" active-text-color="#ffd04b" text-color="#fff" @open="handleOpen" @close="handleClose">
-    <h3>通用后台管理系统</h3>
+  <el-menu default-active="1-4-1" class="el-menu-vertical-demo" background-color="#545c64" active-text-color="#ffd04b" text-color="#fff" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <h3 >{{isCollapse?'后台':'通用后台管理系统'}}</h3>
     <el-menu-item @click="clickMenu(item)" v-for="item in noChildren" :index="item.path + ''" :key="item.path">
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{item.label}}</span>
@@ -96,6 +96,9 @@
         })
       }
     },
+    mounted(){
+      console.log(this.coololl);
+    },
     computed:{
       noChildren(){
         return this.menu.filter(item=> !item.children)
@@ -103,8 +106,15 @@
       hasChildren(){
         return this.menu.filter(item=>item.children)
       },
-    }
+      isCollapse(){
+        return this.$store.state.tab.isCollapse
+      },
+      coololl(){
+        return this.$store
+      }
+    },
   }
+  
 </script>
 <!-- <template>
   <el-menu default-active="1-4-1" class="el-menu-vertical-demo" background-color="#545c64" active-text-color="#ffd04b" text-color="#fff" @open="handleOpen" @close="handleClose" :collapse="isCollapse">

@@ -2,8 +2,12 @@
   <el-container style="height:100%">
     <el-aside width="auto"><common-aside /></el-aside>
      <el-container>
-      <el-header><common-header></common-header></el-header>
-      <el-main><router-view></router-view></el-main>
+      <el-header>
+        <common-header></common-header>
+      </el-header>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
