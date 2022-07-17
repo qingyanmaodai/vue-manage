@@ -7,3 +7,10 @@ export const getMenu = (param) => {
         data: param
     })
 }
+export const getMenu = (param) => {
+    return axios.request({
+        url: '/permission/getMenu',
+        method: 'post',
+        data: param
+    })
+}
