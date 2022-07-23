@@ -7,10 +7,8 @@ export const getMenu = (param) => {
         data: param
     })
 }
-export const getMenu = (param) => {
+export const getData = () => {
     return axios.request({
-        url: '/permission/getMenu',
-        method: 'post',
-        data: param
+        url: '/home/getData'
     })
 }

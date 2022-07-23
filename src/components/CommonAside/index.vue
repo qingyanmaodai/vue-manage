@@ -97,7 +97,7 @@
       }
     },
     mounted(){
-      console.log(this.coololl);
+      // console.log(this.coololl);
     },
     computed:{
       noChildren(){

@@ -15,7 +15,7 @@
         </div>
       </el-card>
       <el-card style="margin-top: 20px;height: 460px;">
-        <el-table>
+        <el-table :data="tableData">
           <el-table-column v-for="(value,key) in tableLable"
           :key="key"
           :prop="key"
@@ -35,7 +35,9 @@
           </div>
         </el-card>
       </div>
-      <el-card style="height: 280px;"></el-card>
+      <el-card style="height: 280px;">
+        <div style="height:280px" ref="echarts"></div>
+      </el-card>
       <div class="graph">
         <el-card style="height: 264px"></el-card>
         <el-card style="height: 264px"></el-card>
@@ -45,11 +47,14 @@
 </template>
 
 <script>
+import { getData } from '../../../api/data.js';
+import * as echarts from 'echarts';
 export default {
   name: "Home",
   data() {
     return {
       userImg:require('@/assets/images/user.png'),
+      tableData:[],
       tableLable: {
         name: "商品",
         todayBuy: "今日购买",
@@ -95,6 +100,40 @@ export default {
         },
       ],
     }
+  },
+  mounted(){
+    getData().then(res => {
+      const {code,data} = res.data
+      if (code === 20000) {
+        this.tableData = data.tableData
+        const order = data.orderData
+        const keyArray = Object.keys(order.data[0])
+        const xData= order.date
+        const series = []
+        keyArray.forEach(key => {
+          series.push({
+            name:key,
+            data:order.data.map(item => item[key]),
+            type:'line'
+          })
+        })
+        const option = {
+          xAxis:{
+            data:xData
+          },
+          yAxis:{},
+          legend:{
+            data:keyArray
+          },
+          series
+        }
+
+        const E = echarts.init(this.$refs.echarts)
+        E.setOption(option)
+        console.log(series);
+      }
+    })
+    // console.log(getMenu);
   }
 };
 </script>
