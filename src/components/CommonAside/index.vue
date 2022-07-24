@@ -11,7 +11,7 @@
         <span slot="title">{{item.label}}</span>
       </template>
       <el-menu-item-group v-for="(items,indexs) in item.children" :key="items.path">
-        <el-menu-item :index="indexs + ''" >{{items.label}}</el-menu-item>
+        <el-menu-item @click="clickMenu(items)" :index="indexs + ''" >{{items.label}}</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     
@@ -47,8 +47,8 @@
               url: 'Home/Home'
             },
             {
-              path: '/mall',
-              name: 'mall',
+              path: '/Mall',
+              name: 'Mall',
               label: '商品管理',
               icon: 'video-play',
               url: 'Mall/Mall'
@@ -94,10 +94,11 @@
         this.$router.push({
           name:item.name
         })
+        this.$store.commit('selectMenu', item)
       }
     },
     mounted(){
-      // console.log(this.coololl);
+      console.log(this.hasChildren);
     },
     computed:{
       noChildren(){

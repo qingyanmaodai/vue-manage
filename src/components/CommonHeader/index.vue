@@ -2,7 +2,10 @@
   <header>
     <div class="l-content">
       <el-button icon="el-icon-menu" plain size="mini" @click="haddleMenu"></el-button>
-      <h3 style="color: #fff">首页</h3>
+      <!-- <h3 style="color: #fff">首页</h3> -->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item v-for="item in tags" :key="item.path" :to="{ path: item.path }">{{item.label}}</el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
     <div class="r-content">
       <el-dropdown trigger="click" size="mini">
@@ -19,6 +22,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "headerPage",
   data() {
@@ -31,8 +35,15 @@ export default {
       this.$store.commit("collapseMenu")
     },
   },
-
-};
+  computed:{
+    ...mapState({
+      tags: state => state.tab.tabsList
+    })
+  },
+  mounted(){
+    console.log(this.tags)
+  }
+}
 </script>
 
 <style lang="less" scoped>

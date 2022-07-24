@@ -13,13 +13,26 @@ const routes = [
                 name: 'Home',
                 path: '/Home',
                 component: () => import('@/views/Home'),
-                // meta:{name:'首页'}
             },
             {
                 name: 'User',
                 path: '/User',
                 component: () => import('@/views/User'),
-                // meta:{name:'首页'}
+            },
+            {
+                name: 'Mall',
+                path: '/Mall',
+                component: () => import('@/views/Mall'),
+            },
+            {
+                name: 'page1',
+                path: '/page1',
+                component: () => import('@/views/Other/pageOne.vue'),
+            },
+            {
+                name: 'page2',
+                path: '/page2',
+                component: () => import('@/views/Other/pageTwo.vue'),
             },
         ]
     },
