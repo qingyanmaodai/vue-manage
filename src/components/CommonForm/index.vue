@@ -40,7 +40,9 @@ export default {
     inline: Boolean,
   },
   data() {
-    return{};
+    return{
+      
+    };
   },
 };
 </script>
