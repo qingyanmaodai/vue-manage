@@ -30,10 +30,13 @@
 
 <script>
 import CommonForm from '../../components/CommonForm';
+import CommonTable from '../../components/CommonTable';
+
 export default {
   name: "User",
   components:{
-    CommonForm
+    CommonForm,
+    CommonTable
   },
   data() {
     return {
@@ -97,7 +100,18 @@ export default {
   },
   methods:{
     confirm(){
+      if(this.operateType === 'edit'){
+        this.$http.post('/user/edit',this.operateForm).then(res => {
+          console.log(res);
+          this.isShow = false
+        })
+      } else {
+        this.$http.post('/user/add',this.operateForm).then(res => {
+          console.log(res);
 
+          this.isShow = false
+        })
+      }
     },
     addUser(){
       this.isShow = true
@@ -117,6 +131,10 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="less" scoped>
+  .manage-header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 </style>
