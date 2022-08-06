@@ -25,6 +25,9 @@
         <el-button type="primary" @click="getList">搜索</el-button>
       </common-form>
     </div>
+    <common-table
+      :tableData="tableData"
+      :tableLabel="tableLabel"></common-table>
   </div>
 </template>
 
@@ -95,7 +98,14 @@ export default {
       ],
       searchFrom:{
         keyword:''
-      }
+      },
+      tableData:[],
+      tableLabel:[
+        {
+          prop:"name",
+          label:"姓名"
+        }
+      ]
     }
   },
   methods:{
