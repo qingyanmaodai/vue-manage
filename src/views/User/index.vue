@@ -27,7 +27,11 @@
     </div>
     <common-table
       :tableData="tableData"
-      :tableLabel="tableLabel"></common-table>
+      :tableLabel="tableLabel"
+      :config="config"
+      @changePage="getList()"
+      @edit="editUser"
+      @del="delUser"></common-table>
   </div>
 </template>
 
@@ -104,8 +108,31 @@ export default {
         {
           prop:"name",
           label:"姓名"
-        }
-      ]
+        },
+        {
+          prop:"age",
+          label:"年龄"
+        },
+        {
+          prop:"sexLabel",
+          label:"性别"
+        },
+        {
+          prop:"birth",
+          label:"出生日期",
+          width:200
+        },
+        {
+          prop:"addr",
+          label:"地址",
+          width:320
+          
+        },
+      ],
+      config:{
+        page:1,
+        total:30,
+      }
     }
   },
   methods:{
@@ -133,6 +160,12 @@ export default {
         birth:'',
         sex:''
       }
+    },
+    editUser(){
+
+    },
+    delUser(){
+
     },
     getList(){
 
