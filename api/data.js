@@ -12,8 +12,10 @@ export const getData = () => {
         url: '/home/getData'
     })
 }
-export const getData = () => {
+export const getUser = (param) => {
     return axios.request({
-        url: '/home/getData'
+        url: '/user/getUser',
+        method:'get',
+        param
     })
 }

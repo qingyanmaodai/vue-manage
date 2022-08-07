@@ -21,7 +21,7 @@
     <el-pagination
       class="page"
       layout="prev,pager,next"
-      :total="config"
+      :total="config.total"
       :current-page.sync="config.page"
       @current-change="changePage"
       :page-size="20"></el-pagination>

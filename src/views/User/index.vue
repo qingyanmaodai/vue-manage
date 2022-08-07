@@ -38,6 +38,8 @@
 <script>
 import CommonForm from '../../components/CommonForm';
 import CommonTable from '../../components/CommonTable';
+import {getUser} from '../../../api/data';
+
 
 export default {
   name: "User",
@@ -131,7 +133,7 @@ export default {
       ],
       config:{
         page:1,
-        total:30,
+        total:30
       }
     }
   },
@@ -141,12 +143,13 @@ export default {
         this.$http.post('/user/edit',this.operateForm).then(res => {
           console.log(res);
           this.isShow = false
+          this.getList()
         })
       } else {
         this.$http.post('/user/add',this.operateForm).then(res => {
           console.log(res);
-
           this.isShow = false
+          this.getList()
         })
       }
     },
@@ -161,15 +164,50 @@ export default {
         sex:''
       }
     },
-    editUser(){
+    editUser(row){
+      this.operateType = 'edit'
+      this.isShow = true
+      this.operateForm = row
 
     },
-    delUser(){
-
+    delUser(row){
+      this.$confirm("此操作将永久删除该内容,是否继续","提示",{
+        confirmButtonText:"确认",
+        cancelButtonText:"取消",
+        type:"warning"
+      }).then(() =>{
+        const id = row.id
+        this.$http.get('user/del',{
+          param:{id}
+        }).then(() => {
+          this.$message({
+            type:'success',
+            message:'删除成功'
+          })
+          this.getList
+        })
+      })
     },
-    getList(){
+    getList(name = ''){
+      this.config.loading = true
+        name ? (this.config.page = 1) : ''
+      getUser({
+        page:this.config.page,
+        name
+      }).then(({ data:res })=> {
+        console.log(res,'res');
+        this.tableData = res.list.map(item => {
+          item.sexLabel = item.sex === 0 ? "女" : "男"
+          return item
+        })
+        this.config.total = res.count
+        this.config.loading = false
 
+      })
     }
+  },
+  created(){
+    this.getList()
   }
 };
 </script>
