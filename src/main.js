@@ -15,6 +15,16 @@ Vue.use(ElementUI)
 
 Vue.prototype.$http = http
 
+router.beforeEach((to,from,next) => {
+  store.commit('getToken')
+  const token = store.state.user.token
+  if (!token && to.name !== 'Login') {
+    next({name:'Login'})
+  } else{
+    next()
+  }
+})
+
 new Vue({
   store,
   router,
