@@ -38,49 +38,7 @@
   export default {
     data() {
       return {
-        menu: [
-            {
-              path: '/',
-              name: 'Home',
-              label: '首页',
-              icon: 's-home',
-              url: 'Home/Home'
-            },
-            {
-              path: '/Mall',
-              name: 'Mall',
-              label: '商品管理',
-              icon: 'video-play',
-              url: 'Mall/Mall'
-            },
-            {
-              path: '/User',
-              name: 'User',
-              label: '用户管理',
-              icon: 'user',
-              url: 'User/User'
-            },
-            {
-              label: '其他',
-              icon: 'location',
-              children: [
-                {
-                  path: '/page1',
-                  name: 'page1',
-                  label: '页面1',
-                  icon: 'setting',
-                  url: 'Other/PageOne'
-                },
-                {
-                  path: '/page2',
-                  name: 'page2',
-                  label: '页面2',
-                  icon: 'setting',
-                  url: 'Other/PageTwo'
-                }
-              ]
-            }
-          ],
+        menu: [],
       };
     },
     methods: {
@@ -98,20 +56,19 @@
       }
     },
     mounted(){
-      console.log(this.hasChildren);
     },
     computed:{
       noChildren(){
-        return this.menu.filter(item=> !item.children)
+        return this.asyncMenu.filter(item=> !item.children)
       },
       hasChildren(){
-        return this.menu.filter(item=>item.children)
+        return this.asyncMenu.filter(item=>item.children)
       },
       isCollapse(){
         return this.$store.state.tab.isCollapse
       },
-      coololl(){
-        return this.$store
+      asyncMenu(){
+        return this.$store.state.tab.menu
       }
     },
   }
