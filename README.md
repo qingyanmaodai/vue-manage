@@ -22,3 +22,5 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+一个使用vue2的一个后台管理练习项目
